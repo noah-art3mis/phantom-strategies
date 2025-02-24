@@ -24,7 +24,7 @@ with st.sidebar:
         captions=[x["description"] for x in STRATEGIES],
     )
 
-    iterations = st.slider("Iterations", 0, 5, 2)
+    # iterations = st.slider("Iterations", 0, 5, 2)
 
     temperature = st.slider("Temperature", 0.0, 1.0, 1.0)
 
@@ -33,7 +33,7 @@ with st.sidebar:
     st.divider()
     st.write("Made by Gustavo Costa")
     st.write(
-        "[Source code](https://github.com/noah-art3mis/prophetic-strategies) / [Blog](https://gustavocosta.psc.br/) / [Instagram](https://www.instagram.com/simulacro.psi/) / [Twitter](https://x.com/simulacrum_ai) / [LinkedIn](https://www.linkedin.com/in/gustavoarcos/)"
+        "[GitHub](https://github.com/noah-art3mis/phantom-strategies) / [LinkedIn](https://www.linkedin.com/in/gustavoarcos/) / [Blog](https://simulacro.co.uk/) / [Instagram](https://www.instagram.com/simulacro.psi/)"
     )
     st.write("")
     st.write("")
@@ -54,7 +54,7 @@ else:
 
     with st.form("my_form", border=False):
         st.write("")
-        question = st.text_input("What is it that you desire (not) to know?")
+        question = st.text_input("What is it that you desire?")
         submit = st.form_submit_button("O, Prophet...")
 
     ### RESULT ###
