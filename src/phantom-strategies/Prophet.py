@@ -54,14 +54,14 @@ class Prophet:
                 return Ficticious(api_key, temp)
             case "Fallacious":
                 return Fallacious(api_key, temp)
-            case "Erratic":
-                return Erratic(api_key, temp)
+            # case "Erratic":
+            #     return Erratic(api_key, temp)
             case "Chimerical":
                 return Chimerical(api_key, temp)
             case "Spectral":
                 return Spectral(api_key, temp)
-            case "Apocryphal":
-                return Apocryphal(api_key, temp)
+            # case "Apocryphal":
+            #     return Apocryphal(api_key, temp)
             case "Quixotic":
                 return Quixotic(api_key, temp)
             case "Mercurial":
@@ -122,39 +122,39 @@ class Ficticious(Prophet):
         self.author = "Lacan"
 
 
-class Erratic(Prophet):
-    """Selects snippets randomly from Lacan's _Seminar Book V_"""
+# class Erratic(Prophet):
+#     """Selects snippets randomly from Lacan's _Seminar Book V_"""
 
-    def __init__(self, api_key: str, temp: float):
-        super().__init__(api_key, temp)
-        self.name = "Erratic"
-        self.model_id = None
-        self.table = "lacan_book5"
-        self.author = "Lacan"
+#     def __init__(self, api_key: str, temp: float):
+#         super().__init__(api_key, temp)
+#         self.name = "Erratic"
+#         self.model_id = None
+#         self.table = "lacan_book5"
+#         self.author = "Lacan"
 
-    def search(self, question: str, df: pd.DataFrame) -> pd.Series:
-        # results = df.sample(iterations)
-        # result = " ".join(results["content"])
-        return df.sample(1).iloc[0]
+#     def search(self, question: str, df: pd.DataFrame) -> pd.Series:
+#         # results = df.sample(iterations)
+#         # result = " ".join(results["content"])
+#         return df.sample(1).iloc[0]
 
-        # def search_iterative(df: pd.DataFrame, iterations: int = 1) -> str:
-        #     item = df.sample(1).iloc[0]
-        #     concatenated = concat_items(df, item, iterations)
-        #     return concatenated
+#         # def search_iterative(df: pd.DataFrame, iterations: int = 1) -> str:
+#         #     item = df.sample(1).iloc[0]
+#         #     concatenated = concat_items(df, item, iterations)
+#         #     return concatenated
 
-    # override
-    def generate(
-        self, search_result: str, message_history: Optional[list]
-    ) -> Generator:
-        return fake_stream(search_result)
+#     # override
+#     def generate(
+#         self, search_result: str, message_history: Optional[list]
+#     ) -> Generator:
+#         return fake_stream(search_result)
 
-    # override
-    def generate_reference(self, content: str, search_result: pd.Series) -> dict:
-        return {
-            "book": search_result["book"],
-            "sentence": search_result["sentence"],
-            "content": content,
-        }
+#     # override
+#     def generate_reference(self, content: str, search_result: pd.Series) -> dict:
+#         return {
+#             "book": search_result["book"],
+#             "sentence": search_result["sentence"],
+#             "content": content,
+#         }
 
 
 class Chimerical(Prophet):
@@ -193,13 +193,13 @@ class Quixotic(Prophet):
         self.author = "Marcus Aurelius"
 
 
-class Apocryphal(Prophet):
-    """SS + FT on Mill's _On Liberty_"""
+# class Apocryphal(Prophet):
+#     """SS + FT on Mill's _On Liberty_"""
 
-    def __init__(self, api_key: str, temp: float):
-        super().__init__(api_key, temp)
-        self.name = "Apocryphal"
-        self.model_id = "ft:gpt-4o-mini-2024-07-18:personal:mill:A09IWIRD"
-        self.base_model = get_base_model(self.model_id)
-        self.table = "mill_liberty"
-        self.author = "Mill"
+#     def __init__(self, api_key: str, temp: float):
+#         super().__init__(api_key, temp)
+#         self.name = "Apocryphal"
+#         self.model_id = "ft:gpt-4o-mini-2024-07-18:personal:mill:A09IWIRD"
+#         self.base_model = get_base_model(self.model_id)
+#         self.table = "mill_liberty"
+#         self.author = "Mill"
