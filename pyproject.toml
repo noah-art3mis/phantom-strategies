@@ -1,0 +1,22 @@
+[tool.poetry]
+package-mode = false
+name = "prophetic-strategies"
+version = "0.1.0"
+description = ""
+authors = ["Gustavo Araujo Costa <gustavo@arcos.org.br>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+streamlit = "^1.37.0"
+openai = "^1.37.1"
+tiktoken = "^0.7.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
