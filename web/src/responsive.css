@@ -1,9 +1,6 @@
-@media (min-width: 1450px) {
-  .hero {
-    min-height: 700px;
-  }
+@media (min-width: 1800px) {
   .apparition {
-    height: 700px;
+    right: -22%;
   }
 }
 @media (max-width: 1100px) {
@@ -11,170 +8,94 @@
     padding-left: 36px;
     padding-right: 36px;
   }
-  h1 {
-    font-size: 76px;
-    letter-spacing: -4px;
+  .apparition {
+    right: -65%;
+    top: -70px;
+    width: 160%;
+    height: 1080px;
+    opacity: 0.8;
   }
   .hero {
-    min-height: 600px;
+    padding-top: 42px;
+    padding-bottom: 70px;
   }
-  .apparition {
-    right: -130px;
-    width: 74%;
-  }
-  .voice {
-    padding: 20px 17px;
-  }
-  .voice-name {
-    font-size: 16px;
-  }
-  .voice-book {
-    font-size: 9px;
-  }
-  .about {
-    gap: 40px;
+  .oracle-heading,
+  #consult-form,
+  .response {
+    width: min(100%, 540px);
   }
 }
 @media (max-width: 767px) {
   .shell {
-    padding-left: 23px;
-    padding-right: 23px;
-  }
-  .nav {
-    height: 80px;
-  }
-  .wordmark {
-    font-size: 20px;
-  }
-  .wordmark-sub {
-    font-size: 9px;
-  }
-  .symbol {
-    font-size: 43px;
-  }
-  .nav nav {
-    display: none;
-  }
-  .motion-toggle {
-    font-size: 10px;
-    padding: 10px 12px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
   .hero {
-    padding-top: 53px;
-    min-height: 635px;
-    padding-bottom: 280px;
-  }
-  .eyebrow {
-    font-size: 7px;
-    letter-spacing: 1.8px;
-    margin-bottom: 25px;
+    padding-top: 36px;
+    padding-bottom: 365px;
   }
   h1 {
-    font-size: clamp(46px, 10.8vw, 74px);
-    letter-spacing: -3px;
-    line-height: 1.1;
-    margin-bottom: 20px;
-  }
-  .intro {
-    font-size: 13px;
-    line-height: 1.8;
-  }
-  .enter-link {
-    font-size: 11px;
+    font-size: clamp(42px, 11.9vw, 88px);
+    letter-spacing: -0.075em;
+    line-height: 0.92;
   }
   .apparition {
-    top: 240px;
-    right: -85px;
-    width: 110%;
-    height: 430px;
-    opacity: 0.9;
+    top: 65px;
+    right: -43%;
+    width: 150%;
+    height: 620px;
+    opacity: 1;
+    mask-image: radial-gradient(
+      ellipse at 55% 40%,
+      #000 26%,
+      #000b 50%,
+      transparent 72%
+    );
   }
   .oracle {
-    padding-top: 0;
     padding-bottom: 65px;
   }
   .oracle-heading {
-    margin-bottom: 25px;
+    margin-bottom: 28px;
   }
   h2 {
-    font-size: 27px;
-    letter-spacing: -1px;
-  }
-  .oracle-heading p {
-    font-size: 11px;
+    font-size: 23px;
   }
   .voices {
-    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    flex-wrap: wrap;
   }
   .voice {
-    padding: 19px 17px;
-  }
-  .voice:nth-child(2) {
-    border-right: 0;
-  }
-  .voice:nth-child(-n + 2) {
-    border-bottom: 1px solid var(--line);
+    flex: 1 0 calc(50% - 12px);
+    align-items: flex-start;
+    min-height: 54px;
   }
   .voice-name {
-    font-size: 16px;
-    margin-bottom: 12px;
+    font-size: 13px;
   }
   .voice-author {
-    font-size: 11px;
-  }
-  .voice-book {
     font-size: 9px;
-    line-height: 1.5;
+    margin-top: 7px;
   }
-  .question-box {
-    padding: 19px;
+  fieldset {
+    margin-bottom: 30px;
   }
   textarea {
-    font-size: 18px;
-    min-height: 105px;
+    font-size: 22px;
+    min-height: 80px;
   }
   .form-bottom {
-    gap: 26px;
-    align-items: stretch;
-    flex-direction: column;
-  }
-  .temperature {
-    width: 100%;
-  }
-  .temperature input {
-    height: 5px;
+    gap: 20px;
   }
   .summon {
-    width: 100%;
-    min-height: 58px;
-  }
-  .about {
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding-top: 10px;
-    padding-bottom: 50px;
-  }
-  .about-art {
-    height: 250px;
-    order: 2;
-  }
-  .about-copy {
-    padding-top: 45px;
-  }
-  .about h2 {
-    font-size: 39px;
-  }
-  .about p {
-    font-size: 12px;
+    font-size: 14px;
+    gap: 16px;
   }
   footer {
     padding-top: 25px;
     padding-bottom: 25px;
     flex-wrap: wrap;
     font-size: 9px;
-  }
-  .footer-brand {
-    font-size: 12px;
   }
   footer > div {
     width: 100%;
@@ -201,8 +122,8 @@
 .skip:not(:focus) {
   clip-path: inset(50%);
 }
-@media (min-width: 768px) {
-  .nav {
-    height: 80px;
+@media (max-width: 767px) {
+  .apparition::after {
+    background: linear-gradient(180deg, transparent 40%, #090a0d 75%);
   }
 }

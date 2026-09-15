@@ -1,64 +1,46 @@
 .oracle {
   position: relative;
   z-index: 2;
-  padding-top: 16px;
-  padding-bottom: 105px;
+  padding-top: 0;
+  padding-bottom: 92px;
+}
+.oracle-heading,
+#consult-form,
+.response {
+  width: min(100%, 590px);
 }
 .oracle-heading {
   margin-bottom: 34px;
 }
 h2 {
   font-weight: 400;
-  letter-spacing: -1.4px;
-  font-size: 36px;
-  line-height: 1.2;
-  margin: 0 0 12px;
-}
-.oracle-heading p {
-  font-size: 13px;
-  color: var(--muted);
+  letter-spacing: -0.9px;
+  font-size: 27px;
+  line-height: 1.3;
   margin: 0;
 }
 fieldset {
   padding: 0;
   border: 0;
-  margin: 0 0 28px;
+  margin: 0 0 36px;
 }
 legend {
-  font-size: 11px;
-  margin-bottom: 15px;
-  color: #c8c9d0;
+  font-size: 10px;
+  margin-bottom: 18px;
+  color: var(--muted);
 }
 .voices {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 .voice {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 23px 24px 24px;
   cursor: pointer;
-  border-right: 1px solid var(--line);
-  background: #101115;
-  transition: background 0.25s;
-}
-.voice:last-child {
-  border-right: 0;
-}
-.voice:hover {
-  background: #181a1e;
-}
-.voice:has(input:checked) {
-  background: linear-gradient(115deg, #c5f4d313, #b7cfe908);
-  box-shadow: inset 0 -2px var(--accent);
-}
-.voice:has(input:focus-visible) {
-  outline: 2px solid var(--accent);
-  outline-offset: -4px;
+  min-height: 50px;
+  padding: 5px 0;
 }
 .voice input {
   position: absolute;
@@ -67,138 +49,107 @@ legend {
   height: 1px;
 }
 .voice-name {
-  font-size: 18px;
-  letter-spacing: -0.5px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 18px;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  color: #b5b5bf;
+  padding-bottom: 7px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
-.voice-name > span {
-  opacity: 0.25;
+.voice:hover .voice-name {
+  color: #fff;
 }
 .voice:has(input:checked) .voice-name {
-  color: var(--accent);
+  color: #fff;
+  border-color: #d4c6e6;
+  background: var(--pearl-spectrum);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: spectral-flow 3s linear infinite;
 }
-.voice:has(input:checked) .voice-name > span {
-  opacity: 1;
+.voice:has(input:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 5px;
 }
 .voice-author {
-  font-size: 12px;
-  color: #d0d0d6;
+  color: #b5b5bf;
+  font-size: 9px;
+  margin-top: 10px;
 }
 .voice-book {
-  color: var(--muted);
-  font-size: 10px;
-  margin-top: 6px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 .question-box {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 22px 25px 17px;
-  background: #101115;
+  border-bottom: 1px solid #ffffff50;
+  padding: 0 0 8px;
 }
 .question-box:focus-within {
-  border-color: #cdf6d885;
-}
-.question-box label {
-  display: block;
-  font-size: 11px;
-  color: #c8c9d0;
-  margin-bottom: 14px;
+  border-color: #fff;
 }
 textarea {
   display: block;
   width: 100%;
-  resize: vertical;
-  min-height: 100px;
-  max-height: 380px;
+  resize: none;
+  min-height: 85px;
+  max-height: 300px;
   background: transparent;
   border: 0;
   color: #f0f1ef;
-  font-size: 22px;
-  letter-spacing: -0.6px;
-  line-height: 1.6;
+  font-size: 24px;
+  letter-spacing: -0.7px;
+  line-height: 1.5;
   padding: 0;
 }
 textarea:focus-visible {
   outline: 0;
 }
 textarea::placeholder {
-  color: #90909c;
-}
-.question-count {
-  display: block;
-  text-align: right;
-  font-size: 10px;
-  color: var(--muted);
+  color: #a4a5ae;
 }
 .form-bottom {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 26px;
-  gap: 35px;
-}
-.temperature {
-  width: 245px;
-}
-.temperature > div {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-}
-.temperature output {
-  color: var(--accent);
-}
-.temperature input {
-  width: 100%;
-  height: 3px;
-  accent-color: var(--accent);
-  margin: 18px 0 6px;
-  cursor: pointer;
-}
-.temperature p {
-  font-size: 10px;
-  color: var(--muted);
-  margin: 8px 0 0;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: 22px;
+  gap: 30px;
 }
 .summon {
   border: 0;
-  background: var(--accent);
-  color: #151e1a;
-  border-radius: 6px;
-  min-height: 56px;
-  padding: 0 27px;
-  min-width: 217px;
+  background: transparent;
+  color: #fff;
+  min-height: 44px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
-  font-size: 14px;
-  font-weight: 600;
+  gap: 24px;
+  font-size: 17px;
+  font-weight: 500;
   white-space: nowrap;
-  transition: background 0.2s;
 }
 .summon:hover {
-  background: #e0fbe7;
-}
-.summon > span:last-child {
-  font-size: 23px;
-  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 7px;
 }
 .error {
   border-left: 2px solid #efb3bf;
-  background: #27191e;
   color: #ffd5de;
   font-size: 13px;
   line-height: 1.6;
-  padding: 15px 18px;
+  padding: 0 15px;
   margin-top: 28px;
 }
 .response {
   border-top: 1px solid var(--line);
   margin-top: 40px;
-  padding-top: 30px;
+  padding-top: 25px;
 }
 .response-header {
   display: flex;
@@ -207,29 +158,28 @@ textarea::placeholder {
   align-items: center;
 }
 .response h3 {
-  color: var(--accent);
-  font-size: 13px;
+  color: #fff;
+  font-size: 11px;
   font-weight: 500;
 }
 .response-header > span {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--muted);
 }
 #answer {
   font-size: 25px;
-  line-height: 1.8;
+  line-height: 1.7;
   letter-spacing: -0.4px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  max-width: 940px;
 }
 #attribution {
-  font-size: 13px;
+  font-size: 12px;
   color: #dadbe0;
 }
 .reference,
 .fiction-note {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--muted);
   line-height: 1.6;
 }
@@ -242,12 +192,11 @@ textarea::placeholder {
   margin: 28px 0;
 }
 .loading-lines i {
-  height: 13px;
+  height: 8px;
   width: 90%;
-  background: linear-gradient(90deg, #ffffff06, #c9f4d319, #ffffff06);
+  background: linear-gradient(90deg, #ffffff06, #ffffff19, #ffffff06);
   background-size: 200%;
   animation: searching 2s ease infinite;
-  border-radius: 2px;
 }
 .loading-lines i:nth-child(2) {
   width: 97%;

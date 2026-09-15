@@ -3,7 +3,7 @@ export default defineConfig({
   testDir: "tests",
   reporter: "dot",
   use: {
-    baseURL: "http://127.0.0.1:5177",
+    baseURL: "http://127.0.0.1:5189",
     launchOptions: {
       executablePath: "/usr/bin/google-chrome",
       args: [
@@ -15,8 +15,8 @@ export default defineConfig({
     },
   },
   webServer: {
-    command: "npm run dev",
-    url: "http://127.0.0.1:5177",
-    reuseExistingServer: true,
+    command: "npm run dev -- --port 5189 --strictPort",
+    url: "http://127.0.0.1:5189",
+    reuseExistingServer: false,
   },
 });

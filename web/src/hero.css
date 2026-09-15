@@ -1,79 +1,52 @@
-.hero {
-  min-height: 650px;
+main {
   position: relative;
-  display: flex;
-  align-items: flex-start;
   isolation: isolate;
-  padding-top: 80px;
-  padding-bottom: 90px;
-  overflow: hidden;
+  overflow: clip;
+  min-height: calc(100dvh - 80px);
+}
+.hero {
+  position: relative;
+  padding-top: 38px;
+  padding-bottom: 70px;
 }
 .hero-copy {
   position: relative;
   z-index: 2;
   pointer-events: none;
 }
-.hero-copy a {
-  pointer-events: auto;
-}
-.eyebrow {
-  font-size: 9px;
-  letter-spacing: 2.8px;
-  color: #b1b5bd;
-  margin: 0 0 37px;
-}
 h1 {
-  font-size: clamp(64px, 6.6vw, 98px);
-  font-weight: 400;
-  letter-spacing: -6px;
-  line-height: 1.08;
-  margin: 0 0 30px;
+  font-size: clamp(80px, 11vw, 174px);
+  font-weight: 800;
+  letter-spacing: -0.085em;
+  line-height: 0.87;
+  text-transform: uppercase;
+  margin: 0;
 }
 .spectral-text {
-  background: linear-gradient(
-    100deg,
-    #d8f4dc 5%,
-    #ccf1ed 29%,
-    #c8bded 49%,
-    #f0bad1 67%,
-    #f1d3b1 88%
-  );
+  padding: 0.12em;
+  margin: -0.12em;
+  background: var(--pearl-spectrum);
+  background-size: 200% 100%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-.intro {
-  color: #b3b3be;
-  font-size: 16px;
-  line-height: 1.9;
-  margin: 0 0 31px;
-}
-.enter-link {
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 38px;
-  border-bottom: 1px solid #a8cdb680;
-  padding-bottom: 13px;
-  color: var(--accent);
-}
-.enter-link span {
-  font-size: 23px;
+  animation: spectral-flow 10s linear infinite;
 }
 .apparition {
   position: absolute;
-  right: -45px;
-  top: -10px;
-  width: 64%;
-  height: 650px;
-  z-index: 0;
-  background-image: url("/spectral-veil.webp");
-  background-size: cover;
-  background-position: 65% center;
-  mask-image: radial-gradient(
-    ellipse at 56% 47%,
-    #000 15%,
-    #000b 45%,
-    transparent 71%
+  right: -37%;
+  top: -160px;
+  width: 125%;
+  height: 1120px;
+  z-index: -1;
+  pointer-events: none;
+  background: url("/spectral-veil.webp") 65% center/cover;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 2%,
+    #0004 25%,
+    #000 48%,
+    #000 88%,
+    transparent
   );
 }
 #spectral-scene {
@@ -88,6 +61,13 @@ h1 {
 .aura {
   position: absolute;
   inset: 15% 10%;
-  background: radial-gradient(ellipse, #b49de81a, transparent 65%);
+  background: radial-gradient(ellipse, #b49de80d, transparent 65%);
   filter: blur(40px);
+}
+.apparition::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, #090a0d 100%);
+  pointer-events: none;
 }

@@ -27,11 +27,13 @@ reducedMotion.addEventListener("change", (event) => {
 updateMotion();
 
 $("question").addEventListener("input", () => {
-  $("question-count").value = $("question").value.length;
   $("question").setCustomValidity("");
 });
-$("temperature").addEventListener("input", () => {
-  $("temperature-value").value = Number($("temperature").value).toFixed(1);
+$("question").addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && !event.shiftKey && !event.isComposing) {
+    event.preventDefault();
+    if (!submit.disabled) form.requestSubmit();
+  }
 });
 
 form.addEventListener("submit", async (event) => {
@@ -45,12 +47,11 @@ form.addEventListener("submit", async (event) => {
   const request = {
     question,
     strategy: new FormData(form).get("strategy"),
-    temperature: Number($("temperature").value),
+    temperature: 1,
   };
   submit.disabled = true;
   $("voice-options").disabled = true;
   $("question").disabled = true;
-  $("temperature").disabled = true;
   $("submit-label").textContent = "Listening...";
   $("form-error").hidden = true;
   $("response").hidden = false;
@@ -86,7 +87,6 @@ form.addEventListener("submit", async (event) => {
     submit.disabled = false;
     $("voice-options").disabled = false;
     $("question").disabled = false;
-    $("temperature").disabled = false;
     $("submit-label").textContent = "O, Prophet...";
     $("loading-lines").hidden = true;
     $("response").setAttribute("aria-busy", "false");
