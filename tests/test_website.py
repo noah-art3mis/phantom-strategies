@@ -65,7 +65,7 @@ def test_unconfigured_oracle_has_an_actionable_unavailable_state(monkeypatch):
     assert "unavailable" in response.json()["detail"].lower()
 
 
-def test_provider_failure_does_not_expose_secrets():
+def test_provider_failure_is_diagnosable_without_exposing_secrets(caplog):
     class BrokenOracle:
         def answer(self, *args):
             raise RuntimeError("private provider diagnostics")
@@ -76,6 +76,10 @@ def test_provider_failure_does_not_expose_secrets():
     )
     assert response.status_code == 502
     assert "private" not in response.text
+    assert "RuntimeError" in caplog.text
+    assert "answer" in caplog.text
+    assert "private provider diagnostics" not in caplog.text
+    assert "Why?" not in caplog.text
 
 
 def test_strategies_expose_existing_choices_without_model_credentials():

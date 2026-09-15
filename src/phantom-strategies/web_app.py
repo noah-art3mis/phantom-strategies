@@ -1,6 +1,8 @@
 """HTTP and static-file entry point for the standalone Prophetic Strategies website."""
 
+import logging
 import os
+import traceback
 from pathlib import Path
 from typing import Literal
 
@@ -69,7 +71,17 @@ def create_app(oracle=None):
             )
         except HTTPException:
             raise
-        except Exception:  # noqa: BLE001 - HTTP boundary must not expose provider diagnostics.
+        except Exception as error:  # noqa: BLE001 - HTTP boundary must not expose provider diagnostics.
+            # Exception messages and locals can contain credentials or user content.
+            frames = traceback.extract_tb(error.__traceback__)
+            logging.getLogger(__name__).error(
+                "Consultation failed: %s; frames=%s",
+                type(error).__name__,
+                " -> ".join(
+                    f"{Path(frame.filename).name}:{frame.lineno}:{frame.name}"
+                    for frame in frames
+                ),
+            )
             raise HTTPException(
                 502, "The connection to the oracle was interrupted. Please try again."
             ) from None
