@@ -9,7 +9,7 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
     expect(route.request().postDataJSON()).toEqual({
       question: "What do I desire?",
       strategy: "Spectral",
-      temperature: 0.7,
+      temperature: 1,
     });
     await route.fulfill({
       json: {
@@ -23,6 +23,10 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
   });
   await page.goto("/");
   await expect(page.locator("#spectral-scene canvas")).toBeAttached();
+  await expect(page.locator("h1")).toHaveScreenshot("title.png", {
+    animations: "disabled",
+    stylePath: "tests/title-snapshot.css",
+  });
   // A cached navigation suspends and restores this document without rerunning modules.
   await page.evaluate(() => {
     window.dispatchEvent(
@@ -35,8 +39,7 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
   await expect(page.locator("#spectral-scene canvas")).toBeAttached();
   await page.locator("#question").fill("What do I desire?");
   await page.locator(".voice").filter({ hasText: "Spectral" }).click();
-  await page.locator("summary").filter({ hasText: "Temperature" }).click();
-  await page.locator("#temperature").fill("0.7");
+  await expect(page.locator("#temperature")).toHaveCount(0);
   await page.getByRole("button", { name: "O, Prophet..." }).click();
   await expect(page.locator("#answer")).toHaveText(
     "The familiar becomes strange.",

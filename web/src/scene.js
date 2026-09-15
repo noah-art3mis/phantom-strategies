@@ -66,10 +66,14 @@ export function createScene(container, initiallyPaused) {
   let time = 0;
   let previous = 0;
   const pointer = new THREE.Vector2();
+  const pointerTarget = new THREE.Vector2();
   function render(timestamp = 0) {
     const delta = previous ? Math.min((timestamp - previous) / 1000, 0.05) : 0;
     previous = timestamp;
     time += delta;
+    // Ease toward the cursor slowly; autonomous motion remains dominant.
+    pointer.x = THREE.MathUtils.damp(pointer.x, pointerTarget.x, 0.6, delta);
+    pointer.y = THREE.MathUtils.damp(pointer.y, pointerTarget.y, 0.6, delta);
     material.uniforms.uTime.value = time;
     material.uniforms.uIntensity.value +=
       ((listening ? 1 : 0) - material.uniforms.uIntensity.value) * 0.025;
@@ -100,7 +104,7 @@ export function createScene(container, initiallyPaused) {
   });
   intersection.observe(container);
   const move = (event) => {
-    pointer.set(
+    pointerTarget.set(
       event.clientX / innerWidth - 0.5,
       event.clientY / innerHeight - 0.5,
     );
