@@ -25,11 +25,20 @@ h1 {
 .spectral-text {
   padding: 0.12em;
   margin: -0.12em;
-  background: var(--pearl-spectrum);
+  background: repeating-linear-gradient(
+    100deg,
+    #9be4ca 0%,
+    #e8f1ee 8%,
+    #b8a1eb 17%,
+    #efa6cb 25%,
+    #ebd092 33%,
+    #96dce1 42%,
+    #9be4ca 50%
+  );
   background-size: 200% 100%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: spectral-flow 10s linear infinite;
+  animation: spectral-flow 14s linear infinite;
 }
 .apparition {
   position: absolute;
