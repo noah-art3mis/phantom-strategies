@@ -40,7 +40,11 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
   await page.locator("#question").fill("What do I desire?");
   await page.locator(".voice").filter({ hasText: "Spectral" }).click();
   await expect(page.locator("#temperature")).toHaveCount(0);
-  await page.getByRole("button", { name: "O, Prophet..." }).click();
+  await page.locator("#question").focus();
+  await page.locator("#question").press("Shift+Enter");
+  await expect(page.locator("#question")).toHaveValue("What do I desire?\n");
+  await expect(page.locator("#response")).toBeHidden();
+  await page.locator("#question").press("Enter");
   await expect(page.locator("#answer")).toHaveText(
     "The familiar becomes strange.",
   );
