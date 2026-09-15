@@ -1,15 +1,17 @@
 """HTTP and static-file entry point for the standalone Prophetic Strategies website."""
 
-import logging
 import os
-import traceback
+from ipaddress import ip_address
 from pathlib import Path
 from typing import Literal
 
+from admission import Admission
 from constants import STRATEGIES
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
+from oracle_stream import FAILURE, OracleResponse, log_failure
 from pydantic import BaseModel, ConfigDict, Field
+from starlette.concurrency import run_in_threadpool
 
 
 class Consultation(BaseModel):
@@ -20,7 +22,7 @@ class Consultation(BaseModel):
 
 
 class LiveOracle:
-    def answer(self, question, strategy, temperature):
+    def events(self, question, strategy, temperature):
         from Prophet import Prophet
 
         from utils import get_data
@@ -35,18 +37,20 @@ class LiveOracle:
         )
         result = prophet.search(question, get_data(prophet.table))
         stream = prophet.generate(result["content"], message_history=[])
+        content = ""
         try:
-            content = "".join(
-                chunk.choices[0].delta.content or ""
-                for chunk in stream
-                if chunk.choices
-            )
+            for chunk in stream:
+                text = chunk.choices[0].delta.content if chunk.choices else None
+                if text:
+                    content += text
+                    yield {"type": "delta", "text": text}
         finally:
             stream.close()
         if not content.strip():
             raise RuntimeError("Empty generation")
         reference = prophet.generate_reference(content, result)
-        return {
+        yield {
+            "type": "done",
             "content": content,
             "author": prophet.author,
             "strategy": strategy,
@@ -55,36 +59,50 @@ class LiveOracle:
         }
 
 
-def create_app(oracle=None):
+def create_app(oracle=None, admission=None, trust_proxy=None):
     app = FastAPI(title="Prophetic Strategies", docs_url=None, redoc_url=None)
     service = oracle if oracle is not None else LiveOracle()
+    gate = admission if admission is not None else Admission()
+    behind_proxy = (
+        os.environ.get("RENDER") == "true" if trust_proxy is None else trust_proxy
+    )
+
+    async def admitted(request: Request):
+        visitor = request.client.host if request.client else "unknown"
+        if behind_proxy and request.headers.get("x-forwarded-for"):
+            # The nearest proxy appends the peer; ignore client-supplied prefixes.
+            candidate = request.headers["x-forwarded-for"].split(",")[-1].strip()
+            try:
+                visitor = str(ip_address(candidate))
+            except ValueError:
+                raise HTTPException(400, "Invalid forwarding address.") from None
+        with gate.slot(visitor):
+            yield
 
     @app.get("/api/strategies")
     def strategies():
         return STRATEGIES
 
-    @app.post("/api/consult")
-    def consult(request: Consultation):
+    @app.post("/api/consult", dependencies=[Depends(admitted)])
+    async def consult(request: Consultation):
+        events = None
         try:
-            return service.answer(
+            events = service.events(
                 request.question, request.strategy, request.temperature
             )
+            first = await run_in_threadpool(next, events, None)
+            if first is None:
+                raise RuntimeError("Empty oracle stream")
+            return OracleResponse(events, first)
         except HTTPException:
+            if events is not None:
+                await run_in_threadpool(events.close)
             raise
         except Exception as error:  # noqa: BLE001 - HTTP boundary must not expose provider diagnostics.
-            # Exception messages and locals can contain credentials or user content.
-            frames = traceback.extract_tb(error.__traceback__)
-            logging.getLogger(__name__).error(
-                "Consultation failed: %s; frames=%s",
-                type(error).__name__,
-                " -> ".join(
-                    f"{Path(frame.filename).name}:{frame.lineno}:{frame.name}"
-                    for frame in frames
-                ),
-            )
-            raise HTTPException(
-                502, "The connection to the oracle was interrupted. Please try again."
-            ) from None
+            if events is not None:
+                await run_in_threadpool(events.close)
+            log_failure(error)
+            raise HTTPException(502, FAILURE) from None
 
     @app.get("/api/health")
     def health():

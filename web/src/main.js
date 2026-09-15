@@ -64,18 +64,28 @@ form.addEventListener("submit", async (event) => {
   $("fiction-note").hidden = true;
   scene?.setListening(true);
   try {
-    const answer = await consult(request);
+    const answer = await consult(request, (text) => {
+      const first = !$("answer").textContent;
+      $("answer").append(document.createTextNode(text));
+      $("loading-lines").hidden = true;
+      $("fiction-note").hidden = false;
+      if (first) {
+        $("response").scrollIntoView({
+          behavior: paused ? "instant" : "smooth",
+          block: "nearest",
+        });
+      }
+    });
     $("answer").textContent = answer.content;
     $("attribution").textContent = `${answer.author}, the ${answer.strategy}`;
     $("reference").textContent = `${answer.book} · Sentence ${answer.sentence}`;
     $("fiction-note").hidden = false;
     $("response-status").textContent = "The oracle has spoken.";
-    $("response").scrollIntoView({
-      behavior: paused ? "instant" : "smooth",
-      block: "nearest",
-    });
   } catch (error) {
-    $("response").hidden = true;
+    $("response").hidden = !$("answer").textContent;
+    $("response-status").textContent = $("answer").textContent
+      ? "Incomplete response"
+      : "";
     $("form-error").hidden = false;
     $("form-error").textContent =
       error.name === "TimeoutError"

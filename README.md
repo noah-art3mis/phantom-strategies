@@ -21,7 +21,9 @@ For frontend development, run the API command above and `npm --prefix web run de
 
 The four strategies and fine-tuned model IDs are retained: Ficticious (Lacan), Chimerical (Steiner), Spectral (Hegel), and Quixotic (Marcus Aurelius). The oracle embeds the question, selects a matching corpus passage, and continues it using the selected model and temperature. A separate generation invents its book reference. The interface explicitly labels both the response and reference as imagined.
 
-The frontend waits for the complete response and reference before displaying them. It does not stream tokens. Failed consultations retain the question and settings for retry. The 3D scene loads independently of the form, stops when offscreen or hidden, and respects reduced motion and the manual pause control. A static image remains if WebGL is unavailable.
+The frontend displays answer tokens as they arrive, then appends the generated reference. Search still completes before the first token. Failed consultations retain the question and settings for retry; a partially streamed answer remains visible and is marked incomplete. The 3D scene loads independently of the form, stops when offscreen or hidden, and respects reduced motion and the manual pause control. A static image remains if WebGL is unavailable.
+
+Consultations have server-side admission limits and a cap on simultaneous generations. See [streaming and request limits](docs/streaming-and-limits.md) for the protocol, deployment assumptions, and spending-control limitations.
 
 ## Checks
 

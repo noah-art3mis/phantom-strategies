@@ -45,6 +45,7 @@ def make_book_name(api_key: str, snippet: str) -> str:
         messages=messages,  # type: ignore
         temperature=1,
         stream=False,
+        max_tokens=80,
     )
 
     return response.choices[0].message.content  # type: ignore
