@@ -2,7 +2,7 @@ main {
   position: relative;
   isolation: isolate;
   overflow: clip;
-  min-height: calc(100dvh - 130px);
+  min-height: calc(100dvh - 80px);
 }
 .hero {
   position: relative;
@@ -25,16 +25,7 @@ h1 {
 .spectral-text {
   padding: 0.12em;
   margin: -0.12em;
-  background: linear-gradient(
-    90deg,
-    #9be4ca,
-    #e8f1ee,
-    #b8a1eb,
-    #efa6cb,
-    #ebd092,
-    #96dce1,
-    #9be4ca
-  );
+  background: var(--pearl-spectrum);
   background-size: 200% 100%;
   background-clip: text;
   -webkit-text-fill-color: transparent;

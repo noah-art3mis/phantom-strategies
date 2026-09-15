@@ -1,5 +1,16 @@
 @import "@fontsource-variable/manrope";
 :root {
+  --pearl-spectrum: linear-gradient(
+    90deg,
+    #9be4ca,
+    #e8f1ee,
+    #b8a1eb,
+    #efa6cb,
+    #ebd092,
+    #96dce1,
+    #9be4ca
+  );
+
   font-family: "Manrope Variable", sans-serif;
   color: #f0f1ef;
   background: #090a0d;
@@ -72,14 +83,6 @@ textarea:focus-visible {
 }
 .skip:focus {
   top: 12px;
-}
-.nav {
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  position: relative;
-  z-index: 2;
 }
 footer a:hover {
   color: var(--accent);

@@ -63,7 +63,12 @@ legend {
 }
 .voice:has(input:checked) .voice-name {
   color: #fff;
-  border-color: #fff;
+  border-color: #d4c6e6;
+  background: var(--pearl-spectrum);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: spectral-flow 3s linear infinite;
 }
 .voice:has(input:focus-visible) {
   outline: 1px solid #fff;
