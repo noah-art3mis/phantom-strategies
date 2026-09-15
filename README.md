@@ -36,6 +36,8 @@ The browser smoke test uses `/usr/bin/google-chrome` by default. It exercises su
 
 ## Deployment
 
+For a separate free Render service alongside the existing Streamlit app, follow [Deploy alongside Streamlit](docs/deploy-render.md). Deploy branch `deploy/prophetic-render` directly; do not merge the website changes into `main` for this launch.
+
 Build with `npm --prefix web ci && npm --prefix web run build` and install Python dependencies with `uv sync --frozen --no-dev`. Run `uv run uvicorn web_app:app --app-dir src/phantom-strategies --host 0.0.0.0 --port 8017` behind your HTTPS reverse proxy. Keep `db/` available alongside `src/` and `web/dist/`; the app serves both the API and built website on the same origin. `/api/health` is the health endpoint. This repository change does not deploy or alter the existing hosted app.
 
 ## Artwork
