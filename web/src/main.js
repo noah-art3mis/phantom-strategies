@@ -56,7 +56,7 @@ form.addEventListener("submit", async (event) => {
   $("form-error").hidden = true;
   $("response").hidden = false;
   $("response").setAttribute("aria-busy", "true");
-  $("response-status").textContent = "A thought is taking shape...";
+  $("response-status").textContent = "";
   $("loading-lines").hidden = false;
   $("answer").textContent = "";
   $("attribution").textContent = "";
