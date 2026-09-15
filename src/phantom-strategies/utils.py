@@ -1,15 +1,15 @@
 import time
 from typing import Generator
 from collections import OrderedDict
+from pathlib import Path
 
 import pandas as pd
-import streamlit as st
 
 
 def get_data(table: str | None) -> pd.DataFrame:
     if table is None:
         raise ValueError("table cannot be None")
-    return pd.read_feather(f"db/{table}.feather")
+    return pd.read_feather(Path(__file__).resolve().parents[2] / "db" / f"{table}.feather")
 
 
 def concat_items(df: pd.DataFrame, item: pd.Series, iterations: int) -> str:
@@ -33,17 +33,6 @@ def fake_stream(sentence: str) -> Generator[str, None, None]:
 
 def get_base_model(model_id: str) -> str:
     return model_id.split(":")[1]
-
-
-def update_tokens(n_tokens: int, where: str):
-    TOKEN_MULTIPLIER = 0.05
-
-    value = (st.session_state.tokens_used + n_tokens) * TOKEN_MULTIPLIER
-
-    print(f"Impatience rises: +{value:.0f}; source: {where}")
-
-    result = min(100, value)
-    st.session_state.tokens_used = int(result)
 
 
 def write_roman(num):

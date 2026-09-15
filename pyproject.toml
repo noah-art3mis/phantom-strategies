@@ -5,8 +5,20 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "fastapi>=0.141.1",
     "openai>=1.64.0",
     "pandas>=2.2.3",
-    "streamlit>=1.42.2",
+    "pyarrow>=19.0.1",
     "tiktoken>=0.9.0",
+    "uvicorn[standard]>=0.53.0",
 ]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "ruff>=0.16.7",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src/phantom-strategies"]

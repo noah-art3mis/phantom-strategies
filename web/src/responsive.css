@@ -1,0 +1,208 @@
+@media (min-width: 1450px) {
+  .hero {
+    min-height: 700px;
+  }
+  .apparition {
+    height: 700px;
+  }
+}
+@media (max-width: 1100px) {
+  .shell {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+  h1 {
+    font-size: 76px;
+    letter-spacing: -4px;
+  }
+  .hero {
+    min-height: 600px;
+  }
+  .apparition {
+    right: -130px;
+    width: 74%;
+  }
+  .voice {
+    padding: 20px 17px;
+  }
+  .voice-name {
+    font-size: 16px;
+  }
+  .voice-book {
+    font-size: 9px;
+  }
+  .about {
+    gap: 40px;
+  }
+}
+@media (max-width: 767px) {
+  .shell {
+    padding-left: 23px;
+    padding-right: 23px;
+  }
+  .nav {
+    height: 80px;
+  }
+  .wordmark {
+    font-size: 20px;
+  }
+  .wordmark-sub {
+    font-size: 9px;
+  }
+  .symbol {
+    font-size: 43px;
+  }
+  .nav nav {
+    display: none;
+  }
+  .motion-toggle {
+    font-size: 10px;
+    padding: 10px 12px;
+  }
+  .hero {
+    padding-top: 53px;
+    min-height: 635px;
+    padding-bottom: 280px;
+  }
+  .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.8px;
+    margin-bottom: 25px;
+  }
+  h1 {
+    font-size: clamp(46px, 10.8vw, 74px);
+    letter-spacing: -3px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .intro {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .enter-link {
+    font-size: 11px;
+  }
+  .apparition {
+    top: 240px;
+    right: -85px;
+    width: 110%;
+    height: 430px;
+    opacity: 0.9;
+  }
+  .oracle {
+    padding-top: 0;
+    padding-bottom: 65px;
+  }
+  .oracle-heading {
+    margin-bottom: 25px;
+  }
+  h2 {
+    font-size: 27px;
+    letter-spacing: -1px;
+  }
+  .oracle-heading p {
+    font-size: 11px;
+  }
+  .voices {
+    grid-template-columns: 1fr 1fr;
+  }
+  .voice {
+    padding: 19px 17px;
+  }
+  .voice:nth-child(2) {
+    border-right: 0;
+  }
+  .voice:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+  .voice-name {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .voice-author {
+    font-size: 11px;
+  }
+  .voice-book {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+  .question-box {
+    padding: 19px;
+  }
+  textarea {
+    font-size: 18px;
+    min-height: 105px;
+  }
+  .form-bottom {
+    gap: 26px;
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .temperature {
+    width: 100%;
+  }
+  .temperature input {
+    height: 5px;
+  }
+  .summon {
+    width: 100%;
+    min-height: 58px;
+  }
+  .about {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 10px;
+    padding-bottom: 50px;
+  }
+  .about-art {
+    height: 250px;
+    order: 2;
+  }
+  .about-copy {
+    padding-top: 45px;
+  }
+  .about h2 {
+    font-size: 39px;
+  }
+  .about p {
+    font-size: 12px;
+  }
+  footer {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    flex-wrap: wrap;
+    font-size: 9px;
+  }
+  .footer-brand {
+    font-size: 12px;
+  }
+  footer > div {
+    width: 100%;
+    gap: 23px;
+  }
+  #answer {
+    font-size: 21px;
+  }
+  .response-header {
+    align-items: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+.skip:not(:focus) {
+  clip-path: inset(50%);
+}
+@media (min-width: 768px) {
+  .nav {
+    height: 80px;
+  }
+}

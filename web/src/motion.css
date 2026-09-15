@@ -1,0 +1,29 @@
+@keyframes searching {
+  to {
+    background-position: -200%;
+  }
+}
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-copy {
+  animation: arrive 1.1s ease both;
+}
+.oracle-heading {
+  animation: arrive 1.3s ease both;
+}
+body.motion-paused *,
+body.motion-paused *::before,
+body.motion-paused *::after {
+  animation-play-state: paused !important;
+}
+body.motion-paused {
+  scroll-behavior: auto;
+}
