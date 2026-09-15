@@ -27,7 +27,6 @@ reducedMotion.addEventListener("change", (event) => {
 updateMotion();
 
 $("question").addEventListener("input", () => {
-  $("question-count").value = $("question").value.length;
   $("question").setCustomValidity("");
 });
 $("temperature").addEventListener("input", () => {
