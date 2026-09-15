@@ -102,4 +102,10 @@ import("./scene.js")
   .catch(() => {
     // The locally hosted glass-veil artwork remains visible without WebGL.
   });
-window.addEventListener("pagehide", () => scene?.dispose());
+window.addEventListener("pagehide", (event) => {
+  if (event.persisted) scene?.setPaused(true);
+  else scene?.dispose();
+});
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) scene?.setPaused(paused);
+});

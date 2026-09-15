@@ -22,6 +22,13 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
     });
   });
   await page.goto("/");
+  await expect(page.locator("#spectral-scene canvas")).toBeAttached();
+  // A cached navigation suspends and restores this document without rerunning modules.
+  await page.evaluate(() => {
+    window.dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true }));
+    window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
+  });
+  await expect(page.locator("#spectral-scene canvas")).toBeAttached();
   await page.locator("#question").fill("What do I desire?");
   await page.locator(".voice").filter({ hasText: "Spectral" }).click();
   await page.locator("#temperature").fill("0.7");
