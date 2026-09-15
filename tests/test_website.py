@@ -1,16 +1,20 @@
+import json
+
 import pytest
 from fastapi.testclient import TestClient
 from web_app import create_app
 
 
 class Oracle:
-    def answer(self, question, strategy, temperature):
+    def events(self, question, strategy, temperature):
         assert (question, strategy, temperature) == (
             "What do I desire?",
             "Spectral",
             0.7,
         )
-        return {
+        yield {"type": "delta", "text": "The answer becomes another question."}
+        yield {
+            "type": "done",
             "content": "The answer becomes another question.",
             "author": "Hegel",
             "strategy": strategy,
@@ -30,8 +34,13 @@ def test_question_reaches_oracle_and_returns_its_answer():
         },
     )
     assert response.status_code == 200
-    assert response.json()["content"] == "The answer becomes another question."
-    assert response.json()["author"] == "Hegel"
+    events = [json.loads(line) for line in response.iter_lines()]
+    assert response.headers["content-type"].startswith("application/x-ndjson")
+    assert events[0] == {
+        "type": "delta",
+        "text": "The answer becomes another question.",
+    }
+    assert events[-1]["author"] == "Hegel"
 
 
 @pytest.mark.parametrize(
@@ -67,7 +76,7 @@ def test_unconfigured_oracle_has_an_actionable_unavailable_state(monkeypatch):
 
 def test_provider_failure_is_diagnosable_without_exposing_secrets(caplog):
     class BrokenOracle:
-        def answer(self, *args):
+        def events(self, *args):
             raise RuntimeError("private provider diagnostics")
 
     response = TestClient(create_app(BrokenOracle())).post(
@@ -77,7 +86,7 @@ def test_provider_failure_is_diagnosable_without_exposing_secrets(caplog):
     assert response.status_code == 502
     assert "private" not in response.text
     assert "RuntimeError" in caplog.text
-    assert "answer" in caplog.text
+    assert "events" in caplog.text
     assert "private provider diagnostics" not in caplog.text
     assert "Why?" not in caplog.text
 

@@ -22,4 +22,4 @@ COPY --from=frontend /web/dist ./web/dist
 RUN useradd --create-home app
 USER app
 EXPOSE 10000
-CMD ["sh", "-c", "exec uv run --no-sync uvicorn web_app:app --app-dir src/phantom-strategies --host 0.0.0.0 --port \"$PORT\""]
+CMD ["sh", "-c", "exec uv run --no-sync uvicorn web_app:app --app-dir src/phantom-strategies --host 0.0.0.0 --port \"$PORT\" --workers 1 --no-proxy-headers"]
