@@ -10,6 +10,8 @@ Animation communicates the apparition's unstable presence and subtly intensifies
 
 ## Generated artwork
 
+The spectral headline carries a continuous rainbow sweep using a repeating CSS background-position animation. Matching endpoint colors keep the loop seamless. The existing motion pause control freezes the sweep, and reduced-motion preferences show the static gradient. The effect stays within the letters and does not move or resize the text.
+
 Tool: built-in image generation. Final asset: `web/public/spectral-veil.webp`.
 
 Prompt: “Use case: stylized-concept. Asset: atmospheric background for Phantom Strategies, an experimental philosophical oracle website. Wide landscape 1536x1024. An uncanny dark void with a monumental translucent folded glass membrane emerging on the RIGHT HALF, an organic apparition like a smoke veil made of thin soap film, spectral rainbow interference in pale cyan, molten orange, pink and ultraviolet. Almost black charcoal background #08090b, left half almost entirely empty dark negative space for website typography. Photorealistic high-end experimental 3D render, subtle grain, dreamlike annihilation shimmer, delicate caustics, deep shadows, no planets, no stars, no neon cyberpunk city. No text, no letters, no logo, no watermark. Sculptural, restrained composition but mesmerizing rainbow material.”
