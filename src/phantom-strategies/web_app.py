@@ -1,4 +1,4 @@
-"""HTTP and static-file entry point for the standalone Phantom website."""
+"""HTTP and static-file entry point for the standalone Prophetic Strategies website."""
 
 import os
 from pathlib import Path
@@ -54,7 +54,7 @@ class LiveOracle:
 
 
 def create_app(oracle=None):
-    app = FastAPI(title="Phantom Strategies", docs_url=None, redoc_url=None)
+    app = FastAPI(title="Prophetic Strategies", docs_url=None, redoc_url=None)
     service = oracle if oracle is not None else LiveOracle()
 
     @app.get("/api/strategies")

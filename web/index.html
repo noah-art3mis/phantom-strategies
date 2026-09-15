@@ -8,7 +8,7 @@
       name="description"
       content="Philosophical advice generated with fine-tuned language models."
     />
-    <title>Phantom Strategies</title>
+    <title>Prophetic Strategies</title>
     <link rel="icon" href="data:," />
   </head>
   <body>
@@ -27,7 +27,7 @@
       <section class="hero shell" aria-labelledby="hero-title">
         <div class="hero-copy">
           <h1 id="hero-title">
-            Phantom<br /><span class="spectral-text">Strategies</span>
+            Prophetic<br /><span class="spectral-text">Strategies</span>
           </h1>
         </div>
         <div class="apparition" aria-hidden="true">
@@ -49,15 +49,14 @@
                   name="strategy"
                   value="Ficticious"
                   checked
-                /><span class="voice-name"
-                  >Ficticious <span aria-hidden="true">↗</span></span
+                /><span class="voice-name">Ficticious</span
                 ><span class="voice-author">Jacques Lacan</span
                 ><span class="voice-book">Seminar Book V</span></label
               >
               <label class="voice"
                 ><input type="radio" name="strategy" value="Chimerical" /><span
                   class="voice-name"
-                  >Chimerical <span aria-hidden="true">↗</span></span
+                  >Chimerical</span
                 ><span class="voice-author">Rudolf Steiner</span
                 ><span class="voice-book"
                   >An Outline of Occult Science</span
@@ -66,26 +65,26 @@
               <label class="voice"
                 ><input type="radio" name="strategy" value="Spectral" /><span
                   class="voice-name"
-                  >Spectral <span aria-hidden="true">↗</span></span
+                  >Spectral</span
                 ><span class="voice-author">G. W. F. Hegel</span
                 ><span class="voice-book">Philosophy of Mind</span></label
               >
               <label class="voice"
                 ><input type="radio" name="strategy" value="Quixotic" /><span
                   class="voice-name"
-                  >Quixotic <span aria-hidden="true">↗</span></span
+                  >Quixotic</span
                 ><span class="voice-author">Marcus Aurelius</span
                 ><span class="voice-book">Meditations</span></label
               >
             </div>
           </fieldset>
           <div class="question-box">
-            <label for="question">Your question</label
+            <label class="sr-only" for="question">Your question</label
             ><textarea
               id="question"
               name="question"
               maxlength="2000"
-              rows="3"
+              rows="2"
               required
               placeholder="Type your question…"
             ></textarea
@@ -95,11 +94,10 @@
             >
           </div>
           <div class="form-bottom">
-            <div class="temperature">
-              <div>
-                <label for="temperature">Temperature</label
-                ><output id="temperature-value" for="temperature">1.0</output>
-              </div>
+            <details class="temperature">
+              <summary>Temperature</summary>
+              <output id="temperature-value" for="temperature">1.0</output>
+              <label for="temperature" class="sr-only">Temperature</label>
               <input
                 id="temperature"
                 name="temperature"
@@ -111,7 +109,7 @@
                 aria-describedby="temperature-help"
               />
               <p id="temperature-help">Lower is steadier. Higher wanders.</p>
-            </div>
+            </details>
             <button class="summon" type="submit">
               <span id="submit-label">O, Prophet...</span
               ><span aria-hidden="true">↗</span>

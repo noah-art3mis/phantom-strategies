@@ -11,7 +11,7 @@ export function createScene(container, initiallyPaused) {
   container.appendChild(renderer.domElement);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-  camera.position.z = 6.4;
+  camera.position.z = 5.8;
   const material = new THREE.ShaderMaterial({
     uniforms: { uTime: { value: 0 }, uIntensity: { value: 0 } },
     transparent: true,
@@ -73,9 +73,9 @@ export function createScene(container, initiallyPaused) {
     material.uniforms.uTime.value = time;
     material.uniforms.uIntensity.value +=
       ((listening ? 1 : 0) - material.uniforms.uIntensity.value) * 0.025;
-    apparition.rotation.y = -0.4 + time * 0.075 + pointer.x * 0.1;
+    apparition.rotation.y = -0.4 + time * 0.075 + pointer.x * 0.015;
     apparition.rotation.x =
-      0.5 + Math.sin(time * 0.12) * 0.15 + pointer.y * 0.08;
+      0.5 + Math.sin(time * 0.12) * 0.15 + pointer.y * 0.01;
     renderer.render(scene, camera);
   }
   function updateLoop() {

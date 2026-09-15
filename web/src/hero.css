@@ -1,59 +1,59 @@
-.hero {
-  min-height: 520px;
+main {
   position: relative;
-  display: flex;
-  align-items: flex-start;
   isolation: isolate;
-  padding-top: 65px;
-  padding-bottom: 90px;
-  overflow: hidden;
+  overflow: clip;
+  min-height: calc(100dvh - 130px);
+}
+.hero {
+  position: relative;
+  padding-top: 38px;
+  padding-bottom: 70px;
 }
 .hero-copy {
   position: relative;
   z-index: 2;
   pointer-events: none;
 }
-.hero-copy a {
-  pointer-events: auto;
-}
 h1 {
-  font-size: clamp(76px, 8.5vw, 122px);
-  font-weight: 400;
-  letter-spacing: -6px;
-  line-height: 1.08;
-  margin: 0 0 30px;
+  font-size: clamp(80px, 11vw, 174px);
+  font-weight: 800;
+  letter-spacing: -0.085em;
+  line-height: 0.87;
+  text-transform: uppercase;
+  margin: 0;
 }
 .spectral-text {
   background: linear-gradient(
     90deg,
-    #a9f4d0,
-    #91e8ff,
-    #bda9ff,
-    #ffabd9,
-    #ffd59a,
-    #e5f8a2,
-    #a9f4d0
+    #b3f0ce,
+    #a4e8ff,
+    #c5b2ff,
+    #ffb2d7,
+    #ffcf97,
+    #e5f7a4,
+    #d9f7e5
   );
   background-size: 200% 100%;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: spectral-flow 12s linear infinite;
+  animation: spectral-flow 8s linear infinite;
 }
 .apparition {
   position: absolute;
-  right: -45px;
-  top: -10px;
-  width: 64%;
-  height: 520px;
-  z-index: 0;
-  background-image: url("/spectral-veil.webp");
-  background-size: cover;
-  background-position: 65% center;
-  mask-image: radial-gradient(
-    ellipse at 56% 47%,
-    #000 15%,
-    #000b 45%,
-    transparent 71%
+  right: -37%;
+  top: -160px;
+  width: 125%;
+  height: 1120px;
+  z-index: -1;
+  pointer-events: none;
+  background: url("/spectral-veil.webp") 65% center/cover;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 2%,
+    #0004 25%,
+    #000 48%,
+    #000 88%,
+    transparent
   );
 }
 #spectral-scene {
@@ -68,6 +68,13 @@ h1 {
 .aura {
   position: absolute;
   inset: 15% 10%;
-  background: radial-gradient(ellipse, #b49de81a, transparent 65%);
+  background: radial-gradient(ellipse, #b49de80d, transparent 65%);
   filter: blur(40px);
+}
+.apparition::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, #090a0d 100%);
+  pointer-events: none;
 }

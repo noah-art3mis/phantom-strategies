@@ -1,12 +1,12 @@
-# Spectral website
+# Prophetic Strategies
 
-Design read: an experimental philosophical oracle for curious readers, with a dreamlike spectral language and an iridescent, cinematic visual direction. Design variance 9, motion intensity 8, visual density 4. Native HTML/CSS and Three.js fit the bespoke art direction; there is no claimed official design system.
+Design read: an experimental philosophical oracle for curious readers, with a dreamlike spectral language and an iridescent, cinematic visual direction. The art direction combines monumental, Control-inspired typography with very sparse controls. Design variance 9, motion intensity 8, visual density 2. Native HTML/CSS and Three.js fit the bespoke art direction; there is no claimed official design system.
 
 The original source supplies the product behavior and content: four strategies, temperature, question, generation, imagined reference, and creator links. The live Streamlit URL could not be inspected because it entered a redirect loop. The GitHub source was used as the functional reference.
 
-The whole page stays near-black. Mint identifies controls; rainbow interference belongs to the artwork and headline, as explicitly requested. Manrope supplies the display and body type. Inputs and strategy groups have 8 px corners, primary buttons 6 px, and the small motion control is pill-shaped. The page uses a plain-text product title, an asymmetric 3D hero, and the working oracle form. The custom logo and marketing copy are omitted. Mobile places the apparition below the title and collapses strategy choices into two columns.
+The whole page stays near-black with white text controls. A large uppercase Prophetic Strategies title overlaps an oversized iridescent apparition. Rainbow interference belongs to the artwork and animated title. Manrope supplies the display and body type. Strategy choices are plain text with an underline on the selected voice; the question uses a single writing line, submission is a text action, and temperature sits inside a native disclosure. There are no cards, filled buttons, custom logo, or marketing sections. On mobile, the artwork fades before the form to preserve legibility.
 
-Animation communicates the apparition's unstable presence and subtly intensifies while awaiting a response. It stops outside the viewport and in hidden tabs. Reduced motion renders a still scene; a visible control overrides the pause preference for the current page session. Static artwork is always present beneath the optional WebGL renderer.
+Animation communicates the apparition's unstable presence and subtly intensifies while awaiting a response. Autonomous drift dominates; cursor-driven rotation is intentionally barely perceptible. It stops outside the viewport and in hidden tabs. Reduced motion renders a still scene; a visible control overrides the pause preference for the current page session. Static artwork is always present beneath the optional WebGL renderer.
 
 ## Generated artwork
 
