@@ -20,7 +20,7 @@ class Prophet:
         self.author = None
 
     def search(self, question: str, df: pd.DataFrame) -> pd.Series:
-        return semantic_search(question, df)
+        return semantic_search(question, df, self.api_key)
 
     def generate_reference(self, content: str, search_result: pd.Series) -> dict:
         book_name = make_book_name(self.api_key, content)

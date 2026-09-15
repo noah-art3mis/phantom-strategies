@@ -1,26 +1,14 @@
-import pandas as pd
 import numpy as np
-import streamlit as st
+import pandas as pd
 from openai import OpenAI
 
-from utils import update_tokens
 
-
-def semantic_search(question: str, df: pd.DataFrame) -> pd.Series:
-    qv = _get_embedding(question)
-    df["similarity"] = df["embedding"].apply(lambda x: _cosine_similarity(x, qv))
-    df = df.sort_values("similarity", ascending=False)
-    top_result = df.iloc[0]
-    return top_result
-
-
-def _get_embedding(text: str) -> list[float]:
-    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-    response = client.embeddings.create(input=text, model="text-embedding-3-small")
-    completion = response.data[0].embedding
-
-    update_tokens(response.usage.total_tokens, "embedding")
-    return completion
+def semantic_search(question: str, df: pd.DataFrame, api_key: str) -> pd.Series:
+    client = OpenAI(api_key=api_key, timeout=45, max_retries=0)
+    response = client.embeddings.create(input=question, model="text-embedding-3-small")
+    vector = response.data[0].embedding
+    scores = df["embedding"].apply(lambda item: _cosine_similarity(item, vector))
+    return df.loc[scores.idxmax()]
 
 
 def _cosine_similarity(a: np.ndarray, b: list):

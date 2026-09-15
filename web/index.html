@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090a0d" />
+    <meta
+      name="description"
+      content="An encounter with the unexpected. Ask Phantom Strategies a question and receive a strange reflection from a philosophical voice."
+    />
+    <title>Phantom Strategies · A voice from the other side</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='20' fill='%23090a0d'/%3E%3Ctext x='20' y='29' text-anchor='middle' font-size='29' fill='%23c9f4d3'%3Eφ%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#oracle">Skip to the oracle</a>
+    <header class="nav shell">
+      <a href="#" class="wordmark" aria-label="Phantom Strategies home"
+        ><span class="symbol" aria-hidden="true">φ</span
+        ><span>phantom<span class="wordmark-sub">strategies</span></span></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#oracle">The oracle</a
+        ><a href="#about"
+          >About the experiment <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+      <button
+        type="button"
+        id="motion-toggle"
+        class="motion-toggle"
+        aria-pressed="false"
+      >
+        Pause motion <span aria-hidden="true">Ⅱ</span>
+      </button>
+    </header>
+    <main>
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">AN EXPERIMENT IN PHILOSOPHICAL DIVINATION</p>
+          <h1 id="hero-title">
+            A voice from<br />the <span class="spectral-text">other side.</span>
+          </h1>
+          <p class="intro">
+            Bring a question. Encounter a thought<br />that was never quite
+            yours.
+          </p>
+          <a class="enter-link" href="#oracle"
+            >Consult the oracle <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div class="apparition" aria-hidden="true">
+          <div class="aura"></div>
+          <div id="spectral-scene"></div>
+        </div>
+      </section>
+      <section id="oracle" class="oracle shell" aria-labelledby="oracle-title">
+        <div class="oracle-heading">
+          <h2 id="oracle-title">What is it that you desire?</h2>
+          <p>Let the question lead you somewhere unfamiliar.</p>
+        </div>
+        <form id="consult-form">
+          <fieldset id="voice-options">
+            <legend>Choose a strategy</legend>
+            <div class="voices">
+              <label class="voice"
+                ><input
+                  type="radio"
+                  name="strategy"
+                  value="Ficticious"
+                  checked
+                /><span class="voice-name"
+                  >Ficticious <span aria-hidden="true">↗</span></span
+                ><span class="voice-author">Jacques Lacan</span
+                ><span class="voice-book">Seminar Book V</span></label
+              >
+              <label class="voice"
+                ><input type="radio" name="strategy" value="Chimerical" /><span
+                  class="voice-name"
+                  >Chimerical <span aria-hidden="true">↗</span></span
+                ><span class="voice-author">Rudolf Steiner</span
+                ><span class="voice-book"
+                  >An Outline of Occult Science</span
+                ></label
+              >
+              <label class="voice"
+                ><input type="radio" name="strategy" value="Spectral" /><span
+                  class="voice-name"
+                  >Spectral <span aria-hidden="true">↗</span></span
+                ><span class="voice-author">G. W. F. Hegel</span
+                ><span class="voice-book">Philosophy of Mind</span></label
+              >
+              <label class="voice"
+                ><input type="radio" name="strategy" value="Quixotic" /><span
+                  class="voice-name"
+                  >Quixotic <span aria-hidden="true">↗</span></span
+                ><span class="voice-author">Marcus Aurelius</span
+                ><span class="voice-book">Meditations</span></label
+              >
+            </div>
+          </fieldset>
+          <div class="question-box">
+            <label for="question">Your question</label
+            ><textarea
+              id="question"
+              name="question"
+              maxlength="2000"
+              rows="3"
+              required
+              placeholder="What keeps returning to you?"
+            ></textarea
+            ><span class="question-count"
+              ><output id="question-count" for="question">0</output> /
+              2000</span
+            >
+          </div>
+          <div class="form-bottom">
+            <div class="temperature">
+              <div>
+                <label for="temperature">Temperature</label
+                ><output id="temperature-value" for="temperature">1.0</output>
+              </div>
+              <input
+                id="temperature"
+                name="temperature"
+                type="range"
+                min="0"
+                max="1"
+                step="0.1"
+                value="1"
+                aria-describedby="temperature-help"
+              />
+              <p id="temperature-help">Lower is steadier. Higher wanders.</p>
+            </div>
+            <button class="summon" type="submit">
+              <span id="submit-label">O, Prophet...</span
+              ><span aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <p id="form-error" class="error" role="alert" hidden></p>
+        </form>
+        <section
+          id="response"
+          class="response"
+          aria-labelledby="response-title"
+          aria-busy="false"
+          hidden
+        >
+          <div class="response-header">
+            <h3 id="response-title">An echo returns</h3>
+            <span id="response-status" role="status"></span>
+          </div>
+          <div
+            id="loading-lines"
+            class="loading-lines"
+            aria-hidden="true"
+            hidden
+          >
+            <i></i><i></i><i></i>
+          </div>
+          <p id="answer"></p>
+          <p id="attribution"></p>
+          <p id="reference" class="reference"></p>
+          <p id="fiction-note" class="fiction-note" hidden>
+            The response and its book reference are imagined, not quotations.
+          </p>
+        </section>
+      </section>
+      <section id="about" class="about shell" aria-labelledby="about-title">
+        <div class="about-art" aria-hidden="true"></div>
+        <div class="about-copy">
+          <h2 id="about-title">Not an answer.<br />An apparition.</h2>
+          <p>
+            Phantom Strategies is an experiment in philosophical divination. A
+            question meets a fragment of a book, then passes through a model
+            fine-tuned on its author's writing.
+          </p>
+          <p>
+            What comes back is a fiction. A provocation. An unfamiliar angle on
+            something you thought you knew.
+          </p>
+          <a href="https://github.com/noah-art3mis/phantom-strategies"
+            >Explore the experiment <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="shell">
+      <a href="#" class="footer-brand">phantom strategies</a>
+      <p>Made by Gustavo Costa</p>
+      <div>
+        <a href="https://simulacro.co.uk/">Blog ↗</a
+        ><a href="https://www.linkedin.com/in/gustavoarcos/">LinkedIn ↗</a
+        ><a href="https://www.instagram.com/simulacro.psi/">Instagram ↗</a>
+      </div>
+    </footer>
+    <noscript
+      ><p class="noscript">
+        Enable JavaScript to consult the oracle. You can still read about the
+        experiment below.
+      </p></noscript
+    >
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
