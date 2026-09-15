@@ -14,11 +14,6 @@ h2 {
   line-height: 1.2;
   margin: 0 0 12px;
 }
-.oracle-heading p {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 0;
-}
 fieldset {
   padding: 0;
   border: 0;

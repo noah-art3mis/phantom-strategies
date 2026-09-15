@@ -1,9 +1,9 @@
 @media (min-width: 1450px) {
   .hero {
-    min-height: 700px;
+    min-height: 560px;
   }
   .apparition {
-    height: 700px;
+    height: 560px;
   }
 }
 @media (max-width: 1100px) {
@@ -16,7 +16,7 @@
     letter-spacing: -4px;
   }
   .hero {
-    min-height: 600px;
+    min-height: 480px;
   }
   .apparition {
     right: -130px;
@@ -31,9 +31,6 @@
   .voice-book {
     font-size: 9px;
   }
-  .about {
-    gap: 40px;
-  }
 }
 @media (max-width: 767px) {
   .shell {
@@ -43,31 +40,14 @@
   .nav {
     height: 80px;
   }
-  .wordmark {
-    font-size: 20px;
-  }
-  .wordmark-sub {
-    font-size: 9px;
-  }
-  .symbol {
-    font-size: 43px;
-  }
-  .nav nav {
-    display: none;
-  }
   .motion-toggle {
     font-size: 10px;
     padding: 10px 12px;
   }
   .hero {
-    padding-top: 53px;
-    min-height: 635px;
-    padding-bottom: 280px;
-  }
-  .eyebrow {
-    font-size: 7px;
-    letter-spacing: 1.8px;
-    margin-bottom: 25px;
+    padding-top: 25px;
+    min-height: 520px;
+    padding-bottom: 250px;
   }
   h1 {
     font-size: clamp(46px, 10.8vw, 74px);
@@ -75,18 +55,11 @@
     line-height: 1.1;
     margin-bottom: 20px;
   }
-  .intro {
-    font-size: 13px;
-    line-height: 1.8;
-  }
-  .enter-link {
-    font-size: 11px;
-  }
   .apparition {
-    top: 240px;
+    top: 130px;
     right: -85px;
     width: 110%;
-    height: 430px;
+    height: 380px;
     opacity: 0.9;
   }
   .oracle {
@@ -99,9 +72,6 @@
   h2 {
     font-size: 27px;
     letter-spacing: -1px;
-  }
-  .oracle-heading p {
-    font-size: 11px;
   }
   .voices {
     grid-template-columns: 1fr 1fr;
@@ -148,33 +118,11 @@
     width: 100%;
     min-height: 58px;
   }
-  .about {
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding-top: 10px;
-    padding-bottom: 50px;
-  }
-  .about-art {
-    height: 250px;
-    order: 2;
-  }
-  .about-copy {
-    padding-top: 45px;
-  }
-  .about h2 {
-    font-size: 39px;
-  }
-  .about p {
-    font-size: 12px;
-  }
   footer {
     padding-top: 25px;
     padding-bottom: 25px;
     flex-wrap: wrap;
     font-size: 9px;
-  }
-  .footer-brand {
-    font-size: 12px;
   }
   footer > div {
     width: 100%;

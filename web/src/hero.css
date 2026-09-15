@@ -1,10 +1,10 @@
 .hero {
-  min-height: 650px;
+  min-height: 520px;
   position: relative;
   display: flex;
   align-items: flex-start;
   isolation: isolate;
-  padding-top: 80px;
+  padding-top: 65px;
   padding-bottom: 90px;
   overflow: hidden;
 }
@@ -16,14 +16,8 @@
 .hero-copy a {
   pointer-events: auto;
 }
-.eyebrow {
-  font-size: 9px;
-  letter-spacing: 2.8px;
-  color: #b1b5bd;
-  margin: 0 0 37px;
-}
 h1 {
-  font-size: clamp(64px, 6.6vw, 98px);
+  font-size: clamp(76px, 8.5vw, 122px);
   font-weight: 400;
   letter-spacing: -6px;
   line-height: 1.08;
@@ -45,30 +39,12 @@ h1 {
   -webkit-text-fill-color: transparent;
   animation: spectral-flow 12s linear infinite;
 }
-.intro {
-  color: #b3b3be;
-  font-size: 16px;
-  line-height: 1.9;
-  margin: 0 0 31px;
-}
-.enter-link {
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 38px;
-  border-bottom: 1px solid #a8cdb680;
-  padding-bottom: 13px;
-  color: var(--accent);
-}
-.enter-link span {
-  font-size: 23px;
-}
 .apparition {
   position: absolute;
   right: -45px;
   top: -10px;
   width: 64%;
-  height: 650px;
+  height: 520px;
   z-index: 0;
   background-image: url("/spectral-veil.webp");
   background-size: cover;
