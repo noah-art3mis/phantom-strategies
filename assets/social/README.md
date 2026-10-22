@@ -9,6 +9,6 @@ Images for posting the site on Instagram and similar apps. Those apps show poste
 | `story-9x16-1080x1920.png`                 | 1080×1920 | Stories, Status and Reels covers                  |
 | `*-title-only.png`                         | as above  | Same layouts with only the title                  |
 
-The full versions carry the tagline and `prophetic.simulacro.tech`. The story layouts leave the bottom third clear for Instagram's link sticker.
+The full versions carry the tagline and `prophetic.simulacro.tech`. In the story layouts the art fills the whole frame, so a link sticker sits over it.
 
 They were captured with headless Chrome from the built site at each size, with the oracle form hidden and the hero art repositioned, so the 3D shape differs slightly between images. If the title, tagline or domain changes, regenerate them.
