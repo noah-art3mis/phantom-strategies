@@ -1,7 +1,7 @@
 {
   "name": "Prophetic Strategies",
   "short_name": "Prophetic",
-  "description": "Philosophical advice generated with fine-tuned language models.",
+  "description": "Speak with the ghosts of philosophy, conjured through fine-tuned language models.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#090a0d",
