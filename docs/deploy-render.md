@@ -17,6 +17,10 @@ The repository only includes configuration. Creating the Blueprint is the step t
 
 Auto-deploys are disabled. To release a later version, push the intended changes to `deploy/prophetic-render`, then use the new service's **Manual Deploy → Deploy latest commit** action. Changes to `main` do not deploy this service. Changes to this branch do not change the Streamlit app's configured branch.
 
+## Custom domain
+
+The site's public address is `https://prophetic.simulacro.tech`. Porkbun hosts the `simulacro.tech` DNS, where a `prophetic` CNAME points to `prophetic-strategies-web.onrender.com`; the domain is registered under the service's **Settings → Custom Domains** in Render, which issues its certificate. The link-preview tags in `web/index.html` use this address, so change them if the domain changes.
+
 ## Free-tier behavior
 
 Render's free web services sleep after 15 minutes without incoming traffic. A later request wakes the service, which can take about a minute. The workspace shares 750 free instance hours per month, and bandwidth/build allowances also apply. OpenAI requests are billed separately. All required corpus files are baked into the image; this app needs no persistent disk or external database.
