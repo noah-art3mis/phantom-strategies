@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: prophetic-strategies-web
+    runtime: docker
+    plan: free
+    branch: deploy/prophetic-render
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false

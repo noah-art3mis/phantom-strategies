@@ -1,3 +1,4 @@
+import json
 from types import SimpleNamespace
 
 import pandas as pd
@@ -84,7 +85,13 @@ def test_full_consultation_searches_generates_and_assembles_reference(monkeypatc
         json={"question": "Why?", "strategy": "Spectral", "temperature": 0.7},
     )
     assert response.status_code == 200
-    result = response.json()
+    events = [json.loads(line) for line in response.iter_lines()]
+    assert events[:2] == [
+        {"type": "delta", "text": "A strange "},
+        {"type": "delta", "text": "reflection."},
+    ]
+    result = events[-1]
+    assert result["type"] == "done"
     assert result["content"] == "A strange reflection."
     assert result["author"] == "Hegel"
     assert result["strategy"] == "Spectral"
@@ -97,3 +104,4 @@ def test_full_consultation_searches_generates_and_assembles_reference(monkeypatc
     assert calls[0]["temperature"] == 0.7
     assert "A strange reflection." in calls[1]["messages"][0]["content"]
     assert stream.closed
+    assert calls[1]["max_tokens"] == 80

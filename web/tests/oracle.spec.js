@@ -5,21 +5,25 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.route("**/api/consult", async (route) => {
-    expect(route.request().postDataJSON()).toEqual({
-      question: "What do I desire?",
-      strategy: "Spectral",
-      temperature: 1,
-    });
-    await route.fulfill({
-      json: {
-        content: "The familiar becomes strange.",
-        author: "Hegel",
-        strategy: "Spectral",
-        book: "An imagined book",
-        sentence: 42,
-      },
-    });
+  await page.addInitScript(() => {
+    const originalFetch = window.fetch;
+    let calls = 0;
+    window.fetch = (url, options) => {
+      if (url !== "/api/consult" || calls++ > 0)
+        return originalFetch(url, options);
+      window.consultRequest = JSON.parse(options.body);
+      const body = new ReadableStream({
+        start(controller) {
+          window.streamController = controller;
+        },
+      });
+      window.pushEvent = (event) =>
+        window.streamController.enqueue(
+          new TextEncoder().encode(JSON.stringify(event) + "\n"),
+        );
+      window.pushEvent({ type: "delta", text: "The familiar" });
+      return Promise.resolve(new Response(body));
+    };
   });
   await page.goto("/");
   await expect(page.locator("#spectral-scene canvas")).toBeAttached();
@@ -45,6 +49,26 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
   await expect(page.locator("#question")).toHaveValue("What do I desire?\n");
   await expect(page.locator("#response")).toBeHidden();
   await page.locator("#question").press("Enter");
+  await expect(page.locator("#answer")).toHaveText("The familiar");
+  await expect(page.locator("#reference")).toBeEmpty();
+  await expect(page.locator(".summon")).toBeDisabled();
+  expect(await page.evaluate(() => window.consultRequest)).toEqual({
+    question: "What do I desire?",
+    strategy: "Spectral",
+    temperature: 1,
+  });
+  await page.evaluate(() => {
+    window.pushEvent({ type: "delta", text: " becomes strange." });
+    window.pushEvent({
+      type: "done",
+      content: "The familiar becomes strange.",
+      author: "Hegel",
+      strategy: "Spectral",
+      book: "An imagined book",
+      sentence: 42,
+    });
+    window.streamController.close();
+  });
   await expect(page.locator("#answer")).toHaveText(
     "The familiar becomes strange.",
   );
@@ -54,13 +78,13 @@ test("the oracle can be consulted and retried on desktop and mobile", async ({
   await page.setViewportSize({ width: 390, height: 844 });
   await page.route("**/api/consult", (route) =>
     route.fulfill({
-      status: 503,
-      json: { detail: "The oracle is temporarily unavailable." },
+      status: 429,
+      json: { detail: "Too many requests. Try again in 60 seconds." },
     }),
   );
   await page.getByRole("button", { name: "O, Prophet..." }).click();
   await expect(page.getByRole("alert")).toHaveText(
-    "The oracle is temporarily unavailable.",
+    "Too many requests. Try again in 60 seconds.",
   );
   await expect(
     page.getByRole("button", { name: "O, Prophet..." }),

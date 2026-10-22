@@ -21,7 +21,9 @@ For frontend development, run the API command above and `npm --prefix web run de
 
 The four strategies and fine-tuned model IDs are retained: Ficticious (Lacan), Chimerical (Steiner), Spectral (Hegel), and Quixotic (Marcus Aurelius). The oracle embeds the question, selects a matching corpus passage, and continues it using the selected model and temperature. A separate generation invents its book reference. The interface explicitly labels both the response and reference as imagined.
 
-The frontend waits for the complete response and reference before displaying them. It does not stream tokens. Failed consultations retain the question and settings for retry. The 3D scene loads independently of the form, stops when offscreen or hidden, and respects reduced motion and the manual pause control. A static image remains if WebGL is unavailable.
+The frontend displays answer tokens as they arrive, then appends the generated reference. Search still completes before the first token. Failed consultations retain the question and settings for retry; a partially streamed answer remains visible and is marked incomplete. The 3D scene loads independently of the form, stops when offscreen or hidden, and respects reduced motion and the manual pause control. A static image remains if WebGL is unavailable.
+
+Consultations have server-side admission limits and a cap on simultaneous generations. See [streaming and request limits](docs/streaming-and-limits.md) for the protocol, deployment assumptions, and spending-control limitations.
 
 ## Checks
 
@@ -35,6 +37,8 @@ npm --prefix web run test:browser
 The browser smoke test uses `/usr/bin/google-chrome` by default. It exercises submission, selected parameters, response attribution, failure recovery, and desktop/mobile layouts against a simulated API response. Screenshots are written to `web/test-results/`. Provider access and model availability must be verified with server credentials before a public launch.
 
 ## Deployment
+
+For a separate free Render service alongside the existing Streamlit app, follow [Deploy alongside Streamlit](docs/deploy-render.md). Deploy branch `deploy/prophetic-render` directly; do not merge the website changes into `main` for this launch.
 
 Build with `npm --prefix web ci && npm --prefix web run build` and install Python dependencies with `uv sync --frozen --no-dev`. Run `uv run uvicorn web_app:app --app-dir src/phantom-strategies --host 0.0.0.0 --port 8017` behind your HTTPS reverse proxy. Keep `db/` available alongside `src/` and `web/dist/`; the app serves both the API and built website on the same origin. `/api/health` is the health endpoint. This repository change does not deploy or alter the existing hosted app.
 
